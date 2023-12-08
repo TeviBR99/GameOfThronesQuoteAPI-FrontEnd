@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PersonsComponent } from './persons/persons.component';
 import { PersonElementComponent } from './person-element/person-element.component';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  { path: '', component: PersonsComponent }
+]
 
 @NgModule({
   declarations: [
@@ -11,7 +14,8 @@ import { PersonElementComponent } from './person-element/person-element.componen
     PersonElementComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     PersonsComponent,
