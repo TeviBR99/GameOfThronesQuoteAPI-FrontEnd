@@ -4,6 +4,7 @@ import { HousesComponent } from './houses/houses.component';
 import { HouseElementComponent } from './house-element/house-element.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     HttpClientModule,
+    MatTableModule,
     RouterModule.forChild(routes)
   ],
   exports:[

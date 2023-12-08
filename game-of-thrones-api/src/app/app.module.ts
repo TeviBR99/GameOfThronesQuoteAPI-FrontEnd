@@ -11,6 +11,7 @@ import { QuotesModule } from './quotes/quotes.module';
 import { RouterModule } from '@angular/router';
 
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -23,7 +24,7 @@ import { RouterModule } from '@angular/router';
     HousesModule,
     QuotesModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

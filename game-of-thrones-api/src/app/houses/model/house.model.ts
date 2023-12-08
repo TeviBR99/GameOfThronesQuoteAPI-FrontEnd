@@ -2,7 +2,7 @@ import { Character } from "src/app/persons/model/character.model";
 
 export class House {
   id!: number;
-  houseName!: string;
+  name!: string;
   slug!: string;
-  listOfMembers!: Character[];
+  members!: Character[];
 }
