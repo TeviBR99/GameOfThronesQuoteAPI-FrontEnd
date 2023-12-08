@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 
 
-
 @NgModule({
   declarations: [
     HeaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
+  ],
+  exports:[
+    HeaderComponent
   ]
 })
 export class CoreModule { }
