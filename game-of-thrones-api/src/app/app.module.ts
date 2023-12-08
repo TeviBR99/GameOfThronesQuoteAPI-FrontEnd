@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
 import { PersonsModule } from './persons/persons.module';
 import { HousesModule } from './houses/houses.module';
 import { QuotesModule } from './quotes/quotes.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { QuotesModule } from './quotes/quotes.module';
     HousesModule,
     QuotesModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
