@@ -11,8 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class HousesComponent {
 
   displayedColumns: string[] = ['id','name','slug','members'];
-  dataSource!: MatTableDataSource<House>;
-  dataFetched!: House[];
+  dataFetched: House[] = [];
 
   constructor(private housesService: HousesService) { }
 
@@ -23,16 +22,14 @@ export class HousesComponent {
   getAllHouses():void{
     this.housesService.getHouses().subscribe(
       res =>{
-        console.log(res)
+        console.log("JSON: ", res)
         let index = 0;
-        /*res.forEach(item => {
+        res.forEach(item => {
           item.id = index;
           this.dataFetched.push(item)
           index++;
-          console.log(this.dataFetched)
+          console.log("Data Feched: " , this.dataFetched)
         })
-
-        this.dataSource = new MatTableDataSource<House>(this.dataFetched)*/
       }
 
     )
