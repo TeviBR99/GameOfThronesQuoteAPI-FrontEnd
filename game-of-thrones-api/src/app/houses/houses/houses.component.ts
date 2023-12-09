@@ -28,14 +28,13 @@ export class HousesComponent {
     this.housesService.getHouses()
     .subscribe(
       res =>{
-        console.log("JSON: ", res)
+        console.log("getAllHouses - JSON: ", res)
         let index = 0;
         res.forEach(item => {
           item.id = index;
           this.dataFetched.push(item)
           index++;
         })
-        console.log("Array dataFetched: " , this.dataFetched[0].members.forEach(x=>(console.log("Member: ", x))))
       }
     )
   }
@@ -49,7 +48,6 @@ export class HousesComponent {
   }
 
   actionButton(houseItem:House):void{
-    console.log("actionButton: ", houseItem)
     this.sharedService.setHouse(houseItem)
     this.router.navigate(['/house-info'])
   }

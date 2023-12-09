@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { SharedService } from 'src/app/shared/shared.service';
 import { HousesService } from '../service/houses.service';
 import { House } from '../model/house.model';
+import { switchMap } from 'rxjs';
+import { Character } from 'src/app/persons/model/character.model';
 
 @Component({
   selector: 'app-house-element',
@@ -19,8 +21,19 @@ export class HouseElementComponent {
   }
 
   loadHouseElement():void {
-    this.sharedService.getHouse().subscribe(res => this.houseElement = res)
-    console.log("House Element: ", this.houseElement)
+    this.sharedService.getHouse().subscribe(res =>{
+      this.houseElement = res;
+    })
+  }
+
+  desribeCharacter(person: Character):string {
+    let describe = "";
+    describe += "Name: " + person.name + " , Slug: " + person.slug
+    return describe;
+  }
+
+  goToCharacterInfo(person: Character){
+    console.log("goToCharacterInfo: ", person)
   }
 
 }
