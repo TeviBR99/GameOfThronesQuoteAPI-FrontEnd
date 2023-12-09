@@ -3,7 +3,7 @@ import { Quote } from "src/app/quotes/model/quote.model";
 
 export class Character {
   id!: number;
-  charachterName!: string;
+  name!: string;
   slug!: string;
   house!: House;
   listOfQuotes!: Quote[]
