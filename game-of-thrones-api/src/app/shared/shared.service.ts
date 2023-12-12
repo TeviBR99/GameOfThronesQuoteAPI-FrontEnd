@@ -12,8 +12,7 @@ import { Quote } from '../quotes/model/quote.model';
 export class SharedService {
   private house!: House
 
-  // Use a BehaviorSubject to store and notify subscribers of changes
-  private person !: Character;
+  private person ?: Character;
 
   private quote!: Quote
 
@@ -36,8 +35,8 @@ export class SharedService {
     this.person = person
   }
 
-  getCharacter():Observable<Character >{
-    return of(this.person)
+  getCharacter():Observable<Character>{
+    return this.personsService.getCharacterBySlug(this.person?.slug!);
   }
 
   setQuotes( quote: Quote ):void{

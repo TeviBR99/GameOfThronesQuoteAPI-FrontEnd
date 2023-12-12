@@ -1,7 +1,7 @@
 <p>PERSON ELEMENT</p>
 
-  <p> Name: {{ personElement.name }} </p>
-  <p> Slug: {{ personElement.slug }} </p>
+  <p *ngIf="personElement.name"> Name: {{ personElement.name}} </p>
+  <p *ngIf="personElement.slug"> Slug: {{ personElement }} </p>
 
   <!-- <div *ngFor="let quote of personElement.quotes;">
     <p (click)="goToQuoteInfo(quote)"> - {{ describeQuote(quote) }} </p>

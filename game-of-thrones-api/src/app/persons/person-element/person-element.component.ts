@@ -17,7 +17,7 @@ export class PersonElementComponent {
   constructor(
     private sharedService: SharedService,
     private personsService: PersonsService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
     ) {
   }
 
@@ -25,20 +25,12 @@ export class PersonElementComponent {
     this.getCharacterInfo();
   }
 
-  getCharacterInfo(){
-    console.log("getCharacterInfo")
-    let personSource
-    this.sharedService.getCharacter().subscribe( (personSaved) =>{
-      personSource = personSaved;
-      if( personSource != null){
-        console.log("personSource: ", personSource)
-        this.personsService.getCharacterBySlug(personSource.slug).subscribe( (resPersonService:Character):void => {
-            console.log("resPersonService: ", resPersonService)
-            this.personElement = resPersonService;
-        })
-        console.log("finished process getCharacterInfo")
-      }
-    })
+  getCharacterInfo() {
+    this.sharedService.getCharacter().subscribe((personSaved) => {
+      console.log("personSaved:", personSaved);
+      this.personElement = personSaved;
+      this.cdr.detectChanges(); // Manually trigger change detection
+    });
   }
 
   describeQuote(quote: Quote){
