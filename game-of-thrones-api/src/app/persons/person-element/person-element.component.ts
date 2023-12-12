@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Character } from '../model/character.model';
 import { PersonsService } from '../service/persons.service';
 import { Quote } from 'src/app/quotes/model/quote.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-person-element',
@@ -22,13 +23,12 @@ export class PersonElementComponent {
 
   ngOnInit(){
     this.getCharacterInfo();
-    this.cdr.reattach()
   }
 
   getCharacterInfo(){
     console.log("getCharacterInfo")
     let personSource
-    this.sharedService.person$.subscribe( (personSaved) =>{
+    this.sharedService.getCharacter().subscribe( (personSaved) =>{
       personSource = personSaved;
       if( personSource != null){
         console.log("personSource: ", personSource)
@@ -36,6 +36,7 @@ export class PersonElementComponent {
             console.log("resPersonService: ", resPersonService)
             this.personElement = resPersonService;
         })
+        console.log("finished process getCharacterInfo")
       }
     })
   }

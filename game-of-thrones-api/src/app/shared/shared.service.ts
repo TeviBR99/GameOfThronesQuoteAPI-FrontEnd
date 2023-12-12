@@ -13,10 +13,7 @@ export class SharedService {
   private house!: House
 
   // Use a BehaviorSubject to store and notify subscribers of changes
-  private personSource = new BehaviorSubject<Character | null>(null);
-
-  // Observable for components to subscribe to changes
-  public person$ = this.personSource.asObservable();
+  private person !: Character;
 
   private quote!: Quote
 
@@ -36,11 +33,11 @@ export class SharedService {
   }
 
   setCharacter( person:Character ): void{
-    this.personSource.next(person);
+    this.person = person
   }
 
-  getCharacter():Character | null{
-    return this.personSource.value;
+  getCharacter():Observable<Character >{
+    return of(this.person)
   }
 
   setQuotes( quote: Quote ):void{
