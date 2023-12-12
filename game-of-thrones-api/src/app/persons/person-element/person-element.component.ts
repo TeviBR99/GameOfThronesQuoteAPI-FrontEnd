@@ -22,24 +22,22 @@ export class PersonElementComponent {
 
   ngOnInit(){
     this.getCharacterInfo();
+    this.cdr.reattach()
   }
 
   getCharacterInfo(){
-    let personSource = this.sharedService.getCharacter();
-    if( personSource != null){
-      console.log("personSource: ", personSource)
-      this.personsService.getCharacterBySlug(personSource.slug).subscribe(
-        (resPersonService:Character): void => {
-          console.log("resPersonService: ", resPersonService)
-          this.personElement = resPersonService;
-      },
-      error => {},
-      () =>{
-        console.log("PersonEl: ", this.personElement)
-        this.updateView()
-      })
-    }
-
+    console.log("getCharacterInfo")
+    let personSource
+    this.sharedService.person$.subscribe( (personSaved) =>{
+      personSource = personSaved;
+      if( personSource != null){
+        console.log("personSource: ", personSource)
+        this.personsService.getCharacterBySlug(personSource.slug).subscribe( (resPersonService:Character):void => {
+            console.log("resPersonService: ", resPersonService)
+            this.personElement = resPersonService;
+        })
+      }
+    })
   }
 
   describeQuote(quote: Quote){

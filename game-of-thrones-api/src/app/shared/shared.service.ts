@@ -11,9 +11,13 @@ import { Quote } from '../quotes/model/quote.model';
 })
 export class SharedService {
   private house!: House
- // private person!: Character
-   // Use a BehaviorSubject to store and notify subscribers of changes
+
+  // Use a BehaviorSubject to store and notify subscribers of changes
   private personSource = new BehaviorSubject<Character | null>(null);
+
+  // Observable for components to subscribe to changes
+  public person$ = this.personSource.asObservable();
+
   private quote!: Quote
 
 
