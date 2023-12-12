@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { SharedService } from 'src/app/shared/shared.service';
-import { HousesService } from '../service/houses.service';
 import { House } from '../model/house.model';
-import { switchMap } from 'rxjs';
 import { Character } from 'src/app/persons/model/character.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-house-element',
@@ -14,7 +13,9 @@ export class HouseElementComponent {
 
   houseElement!: House;
 
-  constructor(private housesService: HousesService, private sharedService: SharedService) { }
+  constructor(
+    private sharedService: SharedService,
+    private router: Router) { }
 
   ngOnInit(){
     this.loadHouseElement()
@@ -33,7 +34,9 @@ export class HouseElementComponent {
   }
 
   goToCharacterInfo(person: Character){
-    console.log("goToCharacterInfo: ", person)
+    console.log("Person: ", person)
+    this.sharedService.setCharacter(person)
+    this.router.navigate(['/person-info'])
   }
 
 }

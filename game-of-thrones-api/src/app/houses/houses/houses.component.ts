@@ -28,13 +28,8 @@ export class HousesComponent {
     this.housesService.getHouses()
     .subscribe(
       res =>{
-        console.log("getAllHouses - JSON: ", res)
-        let index = 0;
-        res.forEach(item => {
-          item.id = index;
-          this.dataFetched.push(item)
-          index++;
-        })
+        this.dataFetched = res
+        console.log("dataFetched: ", this.dataFetched)
       }
     )
   }

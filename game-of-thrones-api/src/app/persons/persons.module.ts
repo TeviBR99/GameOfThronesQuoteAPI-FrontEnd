@@ -5,7 +5,8 @@ import { PersonElementComponent } from './person-element/person-element.componen
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: PersonsComponent }
+  { path: '', component: PersonsComponent },
+  { path: 'person-info', component: PersonElementComponent }
 ]
 
 @NgModule({
