@@ -1,9 +1,9 @@
 <p>PERSON ELEMENT</p>
 
   <p *ngIf="personElement.name"> Name: {{ personElement.name}} </p>
-  <p *ngIf="personElement.slug"> Slug: {{ personElement }} </p>
+  <p *ngIf="personElement.slug"> Slug: {{ personElement.slug }} </p>
 
-  <!-- <div *ngFor="let quote of personElement.quotes;">
-    <p (click)="goToQuoteInfo(quote)"> - {{ describeQuote(quote) }} </p>
-  </div>-->
+<div *ngFor="let quote of personElement.quotes;">
+    <p (click)="goToQuoteInfo(quote)"> - {{ quote }} </p>
+</div>
 

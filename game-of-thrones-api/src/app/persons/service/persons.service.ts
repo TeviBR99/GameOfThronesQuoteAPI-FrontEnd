@@ -14,7 +14,7 @@ export class PersonsService {
     return this.http.get<Character[]>('https://api.gameofthronesquotes.xyz/v1/characters');
   }
 
-  getCharacterBySlug(slug: string):Observable<Character>{
-    return this.http.get<Character>("https://api.gameofthronesquotes.xyz/v1/character/" + slug);
+  getCharacterBySlug(slug: string):Observable<Character[]>{
+    return this.http.get<Character[]>("https://api.gameofthronesquotes.xyz/v1/character/" + slug);
   }
 }

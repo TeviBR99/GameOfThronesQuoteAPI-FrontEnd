@@ -16,8 +16,6 @@ export class PersonElementComponent {
 
   constructor(
     private sharedService: SharedService,
-    private personsService: PersonsService,
-    private cdr: ChangeDetectorRef,
     ) {
   }
 
@@ -27,27 +25,14 @@ export class PersonElementComponent {
 
   getCharacterInfo() {
     this.sharedService.getCharacter().subscribe((personSaved) => {
-      console.log("personSaved:", personSaved);
-      this.personElement = personSaved;
-      this.cdr.detectChanges(); // Manually trigger change detection
+      this.personElement = personSaved[0];
     });
-  }
-
-  describeQuote(quote: Quote){
-    return "- " + quote.sentence;
   }
 
   goToQuoteInfo(quote: Quote){
     console.log("goToQuoteInfo")
+
   }
-
-  updateView(){
-    this.cdr.detectChanges();
-  }
-
-
-
-
 
 }
 
