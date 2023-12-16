@@ -4,6 +4,7 @@ import { House } from '../model/house.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
 import { Character } from 'src/app/persons/model/character.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-houses',
@@ -12,7 +13,8 @@ import { Character } from 'src/app/persons/model/character.model';
 })
 export class HousesComponent {
 
-  dataFetched: House[] = [];
+  houses: House[] = [];
+  houseName =  new FormControl('');
 
   constructor(
     private housesService: HousesService,
@@ -27,8 +29,8 @@ export class HousesComponent {
     this.housesService.getHouses()
     .subscribe(
       res =>{
-        this.dataFetched = res
-        console.log("dataFetched: ", this.dataFetched)
+        this.houses = res
+        console.log("dataFetched: ", this.houses)
       }
     )
   }
@@ -41,10 +43,19 @@ export class HousesComponent {
     return description;
   }
 
-  actionButton(houseItem:House):void{
+  goToHouseInfo(houseItem:House):void{
     console.log("House: ", houseItem)
     this.sharedService.setHouse(houseItem)
     this.router.navigate(['/house-info'])
+  }
+
+  searchFilters():void{
+    console.log("HouseName: ", this.houseName.value);
+    this.clearFilters();
+  }
+
+  clearFilters():void{
+    this.houseName.setValue("");
   }
 
 
