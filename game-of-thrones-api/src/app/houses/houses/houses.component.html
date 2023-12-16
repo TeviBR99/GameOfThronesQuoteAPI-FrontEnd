@@ -1,13 +1,27 @@
 <h1> LIST OF HOUSES </h1>
 
 
-
-<label for="houseName"> Search: </label>
 <div>
-  <input id="houseName" type="text" [formControl]="houseName" (keydown.enter)="searchFilters()">
-  <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page" (click)="searchFilters()" ></mat-icon>
-</div>
+  <!-- Filter by name -->
+  <div>
+    <label for="houseName"> Name: </label>
+    <input id="houseName" type="text" [formControl]="houseName" (keydown.enter)="searchFilters()">
+    <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page" (click)="searchFilters()" ></mat-icon>
 
+  </div>
+
+   <!-- Filter by Slug -->
+  <div>
+    Filter by Slug
+  </div>
+
+  <!-- Filter by members -->
+  <div>
+    Filter by members
+  </div>
+
+  <div> Clear Filters <mat-icon aria-hidden="false" aria-label="Clear Filters" fontIcon="cancel_presentation" (click)="clearFilters()" ></mat-icon> </div>
+</div>
 
 <table>
   <tr>

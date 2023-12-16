@@ -28,11 +28,32 @@ export class HousesComponent {
   getAllHouses():void{
     this.housesService.getHouses()
     .subscribe(
-      res =>{
-        this.houses = res
-        console.log("dataFetched: ", this.houses)
+      responseHouses =>{
+        //Returns all the house in case there is no filter
+        if(this.houseName.value == ""){
+          console.log("No filters")
+          this.houses = responseHouses
+          return;
+        }
+        this.houses = responseHouses.filter(item => item.name.toLowerCase().indexOf( this.houseName.value!.toLowerCase() ) > -1 )
       }
     )
+  }
+
+  searchFilters():void{
+    console.log("HouseName: ", this.houseName.value);
+    this.getAllHouses()
+  }
+
+  clearFilters():void{
+    this.houseName.setValue("");
+    this.getAllHouses()
+  }
+
+  goToHouseInfo(houseItem:House):void{
+    console.log("House: ", houseItem)
+    this.sharedService.setHouse(houseItem)
+    this.router.navigate(['/house-info'])
   }
 
   describeCharacter(persons: Character[]): string{
@@ -43,20 +64,6 @@ export class HousesComponent {
     return description;
   }
 
-  goToHouseInfo(houseItem:House):void{
-    console.log("House: ", houseItem)
-    this.sharedService.setHouse(houseItem)
-    this.router.navigate(['/house-info'])
-  }
-
-  searchFilters():void{
-    console.log("HouseName: ", this.houseName.value);
-    this.clearFilters();
-  }
-
-  clearFilters():void{
-    this.houseName.setValue("");
-  }
 
 
 }
