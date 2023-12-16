@@ -1,1 +1,9 @@
-<p>person-element works!</p>
+<p>PERSON ELEMENT</p>
+
+  <p *ngIf="personElement.name"> Name: {{ personElement.name}} </p>
+  <p *ngIf="personElement.slug"> Slug: {{ personElement.slug }} </p>
+
+<div *ngFor="let quote of personElement.quotes;">
+    <p (click)="goToQuoteInfo(quote)"> - {{ quote }} </p>
+</div>
+

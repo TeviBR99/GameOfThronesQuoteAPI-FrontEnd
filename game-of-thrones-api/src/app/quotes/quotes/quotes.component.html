@@ -1,1 +1,6 @@
-<p>quotes works!</p>
+<p>Random quotes</p>
+
+<div *ngFor="let quote of quotes">
+  <p> Sentence: {{ quote.sentence }} </p>
+  <p> - Character: {{ quote.character.name }} </p>
+</div>
