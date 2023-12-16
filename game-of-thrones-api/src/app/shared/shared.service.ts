@@ -11,7 +11,7 @@ import { QuotesService } from '../quotes/service/quotes.service';
   providedIn: 'root'
 })
 export class SharedService {
-  private house!: House
+  private house?: House
 
   private person ?: Character;
 
@@ -21,19 +21,27 @@ export class SharedService {
     ) { }
 
   /* Methos to send data from a component to an other one */
-  getHouse():Observable<House>{
-    return of(this.house)
+  getHouse():House | undefined{
+    return this.house;
   }
 
   setHouse( dataToSave: House ):void{
     this.house = dataToSave;
   }
 
+  getHouseDetail():Observable<House[]>{
+    return this.housesService.getHouseDetail(this.house?.slug!);
+  }
+
   setCharacter( person:Character ): void{
     this.person = person
   }
 
-  getCharacter():Observable<Character[]>{
+  getCharacter( ): Character | undefined{
+    return this.person;
+  }
+
+  getCharacterDetail():Observable<Character[]>{
     return this.personsService.getCharacterBySlug(this.person?.slug!);
   }
 

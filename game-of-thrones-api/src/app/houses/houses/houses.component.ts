@@ -12,7 +12,6 @@ import { Character } from 'src/app/persons/model/character.model';
 })
 export class HousesComponent {
 
-  displayedColumns: string[] = ['id','name','slug','members'];
   dataFetched: House[] = [];
 
   constructor(
@@ -43,6 +42,7 @@ export class HousesComponent {
   }
 
   actionButton(houseItem:House):void{
+    console.log("House: ", houseItem)
     this.sharedService.setHouse(houseItem)
     this.router.navigate(['/house-info'])
   }

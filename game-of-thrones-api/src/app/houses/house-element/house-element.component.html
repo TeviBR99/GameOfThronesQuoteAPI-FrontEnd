@@ -1,10 +1,10 @@
 <p>HOUSE ELEMENT </p>
 
-<p> Name: {{ houseElement.name }} </p>
-<p> Slug: {{ houseElement.slug }} </p>
+<p> Name: {{ houseElement?.name }} </p>
+<p> Slug: {{ houseElement?.slug }} </p>
 
-<p>Members: {{ houseElement.members.length }} </p>
-<div *ngFor="let person of houseElement.members;">
+<p>Members: {{ houseElement?.members!.length }} </p>
+<div *ngFor="let person of houseElement?.members!;">
   <p (click)="goToCharacterInfo(person)"> - {{ desribeCharacter(person) }} </p>
 </div>
 

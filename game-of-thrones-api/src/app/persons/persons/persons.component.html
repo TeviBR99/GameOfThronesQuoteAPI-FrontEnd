@@ -1,2 +1,26 @@
-<p>persons works!</p>
+<h1>LIST OF ALL CHARACTERS</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Slug</th>
+    <th>House</th>
+    <th>Quotes</th>
+  </tr>
+  <tr *ngFor="let person of persons" (click)="goToCharaterDetail(person)" >
+    <td> {{ person.name }} </td>
+    <td> {{ person.slug }}  </td>
+    <td>
+      Slug: {{ person.house?.slug }}
+      Name: {{ person.house?.name }}
+    </td>
+    <td>
+      <div *ngFor="let quote of person.quotes">
+          <p>- {{ quote }} </p>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
 

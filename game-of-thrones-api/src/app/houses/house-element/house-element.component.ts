@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HouseElementComponent {
 
-  houseElement!: House;
+  houseElement?: House;
 
   constructor(
     private sharedService: SharedService,
@@ -22,9 +22,13 @@ export class HouseElementComponent {
   }
 
   loadHouseElement():void {
-    this.sharedService.getHouse().subscribe(res =>{
-      this.houseElement = res;
-    })
+    if(this.sharedService.getHouse() != undefined){
+      console.log("hey")
+      this.sharedService.getHouseDetail().subscribe(houses =>{
+        this.houseElement = houses[0];
+        console.log("houseElement: ", this.houseElement)
+      })
+    }
   }
 
   desribeCharacter(person: Character):string {
