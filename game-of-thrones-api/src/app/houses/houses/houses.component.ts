@@ -5,6 +5,7 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
 import { Character } from 'src/app/persons/model/character.model';
 import { FormControl } from '@angular/forms';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-houses',
@@ -15,6 +16,10 @@ export class HousesComponent {
 
   houses: House[] = [];
   houseName =  new FormControl('');
+
+  slugName =  new FormControl('');
+
+  memberName = new FormControl()
 
   constructor(
     private housesService: HousesService,
@@ -29,15 +34,24 @@ export class HousesComponent {
     this.housesService.getHouses()
     .subscribe(
       responseHouses =>{
-        //Returns all the house in case there is no filter
-        if(this.houseName.value == ""){
-          console.log("No filters")
-          this.houses = responseHouses
-          return;
-        }
-        this.houses = responseHouses.filter(item => item.name.toLowerCase().indexOf( this.houseName.value!.toLowerCase() ) > -1 )
+        this.findAll(responseHouses)
+        this.findWithFilters(responseHouses);
       }
     )
+  }
+
+  findAll(responseHouses:House[]):void{
+    if(this.houseName.value == ""){
+      console.log("findAll")
+      this.houses = responseHouses
+    }
+  }
+
+  findWithFilters(responseHouses:House[]):void{
+    if(this.houseName.value != ""){
+      console.log("findWithFilters")
+      this.houses = responseHouses.filter(item => item.name.toLowerCase().indexOf( this.houseName.value!.toLowerCase() ) > -1 )
+    }
   }
 
   searchFilters():void{
