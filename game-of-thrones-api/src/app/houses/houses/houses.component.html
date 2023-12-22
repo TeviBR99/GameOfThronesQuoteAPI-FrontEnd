@@ -5,22 +5,29 @@
   <!-- Filter by name -->
   <div>
     <label for="houseName"> Name: </label>
-    <input id="houseName" type="text" [formControl]="houseName" (keydown.enter)="searchFilters()">
-    <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page" (click)="searchFilters()" ></mat-icon>
-
+    <input id="houseName" type="text" [formControl]="filter.name" (keydown.enter)="searchFilters()">
   </div>
 
-   <!-- Filter by Slug -->
+  <!-- Filter by Slug -->
   <div>
-    Filter by Slug
+    <label for="houseSlug"> Slug: </label>
+    <input id="houseSlug" type="text" [formControl]="filter.slug" (keydown.enter)="searchFilters()">
   </div>
 
   <!-- Filter by members -->
   <div>
-    Filter by members
+    <label for="houseMember"> Member: </label>
+    <input id="houseMember" type="text" [formControl]="filter.member" (keydown.enter)="searchFilters()">
   </div>
 
-  <div> Clear Filters <mat-icon aria-hidden="false" aria-label="Clear Filters" fontIcon="cancel_presentation" (click)="clearFilters()" ></mat-icon> </div>
+  <div>
+    <button mat-stroked-button  (click)="searchFilters()" >
+      Search <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page"  ></mat-icon>
+    </button>
+    <button mat-stroked-button  (click)="clearFilters()" >
+      Clear Filters <mat-icon aria-hidden="false" aria-label="Clear Filters" fontIcon="cancel_presentation" (click)="clearFilters()" ></mat-icon>
+    </button>
+  </div>
 </div>
 
 <table>

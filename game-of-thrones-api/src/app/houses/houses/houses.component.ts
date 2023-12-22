@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Character } from 'src/app/persons/model/character.model';
 import { FormControl } from '@angular/forms';
 import { from } from 'rxjs';
+import { Filter, FilterHouse } from 'src/app/shared/model/filter.model';
 
 @Component({
   selector: 'app-houses',
@@ -15,11 +16,8 @@ import { from } from 'rxjs';
 export class HousesComponent {
 
   houses: House[] = [];
-  houseName =  new FormControl('');
 
-  slugName =  new FormControl('');
-
-  memberName = new FormControl()
+  filter : FilterHouse = new FilterHouse()
 
   constructor(
     private housesService: HousesService,
@@ -41,26 +39,28 @@ export class HousesComponent {
   }
 
   findAll(responseHouses:House[]):void{
-    if(this.houseName.value == ""){
+    if( this.filter.checkIfFiltersAreEmpty() ){
       console.log("findAll")
-      this.houses = responseHouses
+      this.houses = responseHouses;
     }
   }
 
   findWithFilters(responseHouses:House[]):void{
-    if(this.houseName.value != ""){
+    if( !this.filter.checkIfFiltersAreEmpty() ){
       console.log("findWithFilters")
-      this.houses = responseHouses.filter(item => item.name.toLowerCase().indexOf( this.houseName.value!.toLowerCase() ) > -1 )
+      this.houses = responseHouses.filter(item => item.name.toLowerCase().indexOf( this.filter.name.value!.toLowerCase() ) > -1 )
     }
   }
 
   searchFilters():void{
-    console.log("HouseName: ", this.houseName.value);
+    console.log("HouseName: ", this.filter.name.value);
+    console.log("Slug: ", this.filter.slug.value);
+    console.log("Member: ", this.filter.member.value);
     this.getAllHouses()
   }
 
   clearFilters():void{
-    this.houseName.setValue("");
+    this.filter.clearFilters();
     this.getAllHouses()
   }
 
