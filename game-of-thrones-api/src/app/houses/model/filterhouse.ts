@@ -1,8 +1,9 @@
 import { FormControl } from "@angular/forms";
 import { Filter } from "src/app/shared/model/filter.model";
 import { House } from "./house.model";
+import { Utils } from "src/app/shared/model/utils";
 
-export class FilterHouse extends Filter<House>{
+export class FilterHouse extends Filter{
   member = new FormControl('');
 
   override clearFilters(): void {
@@ -29,10 +30,11 @@ export class FilterHouse extends Filter<House>{
 
       arrayOfHouses.forEach( h =>{
         let members = h.members.filter( m => m.name?.toLowerCase().trim().includes( this.member.value!.toLowerCase().trim() ) )
-        if ( members.length > 0){
+        if ( members.length > 0 && !Utils.checkIfExistsInArray( resultsByNameOrSlug, h ) ){
           matchesWithMembers.push( h )
         }
       })
+      console.log("matchesWithMembers: ", matchesWithMembers)
       resultsByNameOrSlug =  resultsByNameOrSlug.concat( matchesWithMembers  )
     }
 

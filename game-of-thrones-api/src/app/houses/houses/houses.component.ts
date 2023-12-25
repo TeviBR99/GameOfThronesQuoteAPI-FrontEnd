@@ -5,6 +5,7 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
 import { Character } from 'src/app/persons/model/character.model';
 import { FilterHouse } from '../model/filterhouse';
+import { Utils } from 'src/app/shared/model/utils';
 @Component({
   selector: 'app-houses',
   templateUrl: './houses.component.html',
@@ -31,29 +32,19 @@ export class HousesComponent {
       responseHouses =>{
         this.findAll(responseHouses)
         this.findWithFilters(responseHouses);
-        console.log("houses - results: ", this.houses)
       }
     )
   }
 
-  clearList():void{
-    if(this.houses.length > 0){
-      this.houses = [];
-      console.log("houses - results: ", this.houses)
-    }
-  }
-
   findAll(responseHouses:House[]):void{
     if( this.filter.checkIfFiltersAreEmpty() ){
-      console.log("findAll")
       this.houses = responseHouses;
     }
   }
 
   findWithFilters(responseHouses:House[]):void{
     if( !this.filter.checkIfFiltersAreEmpty() ){
-      console.log("findWithFilters")
-      this.houses = this.filter.filterResults(responseHouses);
+      this.houses = this.filter.filterResults(responseHouses) ;
     }
   }
 
@@ -68,7 +59,6 @@ export class HousesComponent {
   }
 
   goToHouseInfo(houseItem:House):void{
-    console.log("House: ", houseItem)
     this.sharedService.setHouse(houseItem)
     this.router.navigate(['/house-info'])
   }
