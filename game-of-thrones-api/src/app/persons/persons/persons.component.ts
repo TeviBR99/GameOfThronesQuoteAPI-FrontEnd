@@ -3,6 +3,8 @@ import { PersonsService } from '../service/persons.service';
 import { Character } from '../model/character.model';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
+import { FilterPerson } from '../model/filterperson';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-persons',
@@ -13,6 +15,8 @@ export class PersonsComponent {
 
   persons?: Character[]
 
+  filter: FilterPerson = new FilterPerson()
+
   constructor(
     private personsService: PersonsService,
     private sharedService: SharedService,
@@ -21,9 +25,30 @@ export class PersonsComponent {
 
 
   ngOnInit(){
-    this.personsService.getAllCharacters().subscribe(characters =>{
-      this.persons = characters
+    this.getAllCharacters()
+  }
+
+  getAllCharacters():void{
+    this.personsService.getAllCharacters().subscribe(charactersResponse =>{
+      this.findAll(charactersResponse)
+      this.findWithFilters(charactersResponse)
     })
+  }
+
+  findAll(characterResponse:Character[]):void{
+
+  }
+
+  findWithFilters(characterResponse:Character[]):void{
+
+  }
+
+  search():void{
+
+  }
+
+  clearFilters():void{
+
   }
 
   goToCharaterDetail(person: Character){

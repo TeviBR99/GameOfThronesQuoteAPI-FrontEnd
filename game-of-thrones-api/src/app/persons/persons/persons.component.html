@@ -1,5 +1,34 @@
 <h1>LIST OF ALL CHARACTERS</h1>
 
+<div>
+  <!-- Filter by name -->
+  <div>
+    <label for="personName"> Name: </label>
+    <input id="personName" type="text" [formControl]="filter.name" >
+  </div>
+
+  <!-- Filter by Slug -->
+  <div>
+    <label for="personSlug"> Slug: </label>
+    <input id="personSlug" type="text" [formControl]="filter.slug" >
+  </div>
+
+  <!-- Filter by members -->
+  <div>
+    <label for="personQuote"> Quote: </label>
+    <input id="personQuote" type="text" [formControl]="filter.quote" >
+  </div>
+
+  <div>
+    <button mat-stroked-button  (click)="search()" >
+      Search <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page"  ></mat-icon>
+    </button>
+    <button mat-stroked-button  (click)="clearFilters()" >
+      Clear Filters <mat-icon aria-hidden="false" aria-label="Clear Filters" fontIcon="cancel_presentation" (click)="clearFilters()" ></mat-icon>
+    </button>
+  </div>
+</div>
+
 <table>
   <tr>
     <th>Nombre</th>
