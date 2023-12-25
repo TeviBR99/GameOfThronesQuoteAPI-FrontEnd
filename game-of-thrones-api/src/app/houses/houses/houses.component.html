@@ -5,23 +5,23 @@
   <!-- Filter by name -->
   <div>
     <label for="houseName"> Name: </label>
-    <input id="houseName" type="text" [formControl]="filter.name" (keydown.enter)="searchFilters()">
+    <input id="houseName" type="text" [formControl]="filter.name" >
   </div>
 
   <!-- Filter by Slug -->
   <div>
     <label for="houseSlug"> Slug: </label>
-    <input id="houseSlug" type="text" [formControl]="filter.slug" (keydown.enter)="searchFilters()">
+    <input id="houseSlug" type="text" [formControl]="filter.slug" >
   </div>
 
   <!-- Filter by members -->
   <div>
     <label for="houseMember"> Member: </label>
-    <input id="houseMember" type="text" [formControl]="filter.member" (keydown.enter)="searchFilters()">
+    <input id="houseMember" type="text" [formControl]="filter.member" >
   </div>
 
   <div>
-    <button mat-stroked-button  (click)="searchFilters()" >
+    <button mat-stroked-button  (click)="searchFilters()" (keydown.enter)="searchFilters()" >
       Search <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page"  ></mat-icon>
     </button>
     <button mat-stroked-button  (click)="clearFilters()" >

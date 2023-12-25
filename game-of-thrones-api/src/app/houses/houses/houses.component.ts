@@ -36,6 +36,13 @@ export class HousesComponent {
     )
   }
 
+  clearList():void{
+    if(this.houses.length > 0){
+      this.houses = [];
+      console.log("houses - results: ", this.houses)
+    }
+  }
+
   findAll(responseHouses:House[]):void{
     if( this.filter.checkIfFiltersAreEmpty() ){
       console.log("findAll")

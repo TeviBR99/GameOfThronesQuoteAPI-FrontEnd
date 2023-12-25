@@ -20,18 +20,40 @@ export class Filter <T extends ApiDto>{
     console.log("Slug: ", this.slug.value);
   }
 
-  filterByNameOrSlug( arrayOfHouses:T[] ) :T[] {
-    return arrayOfHouses.filter( house => {
-      let check = false
-      if(this.name.value != ""){
-        check = house.name!.toLowerCase().trim().indexOf( this.name.value!.toLowerCase().trim() ) > -1;
-      }
+  filterByNameOrSlug( array:T[] ) :T[] {
+    let results: T[] = [];
+    let matchesWithName: T[] = [];
+    let matchesWithSlug: T[] = [];
 
-      if(this.slug.value != ""){
-        check = house.slug!.toLowerCase().indexOf( this.slug.value!.toLowerCase() ) > -1;
+    if(this.name.value != ""){
+      matchesWithName  = array.filter( house => house.name!.toLowerCase().trim().indexOf( this.name.value!.toLowerCase().trim() ) > -1 );
+      console.log("machesWithName: ", matchesWithName)
+      //results = results.concat( matchesWithName );
+    }
+
+    if(this.slug.value != ""){
+      matchesWithSlug = array.filter( house =>  house.slug!.toLowerCase().indexOf( this.slug.value!.toLowerCase().trim() ) > -1);
+      console.log("matchesWithSlug: ", matchesWithSlug)
+    }
+
+    return results.concat(matchesWithName,matchesWithSlug) ;
+  }
+
+  eraseRepetedElements(array:T[] ):T[]{
+    let arrayWithoutRepetaedElements : T[] = [];
+
+    arrayWithoutRepetaedElements = array;
+    if( array.length > 1){
+      arrayWithoutRepetaedElements = [];
+      array.sort( (a,b) => (a.name && b.name ? a.name.localeCompare(b.name) : 0 ) );
+      for(let i=1; i<array.length; i++){
+        if( array.at( i-1 )!.name == array.at(i)!.name){
+          arrayWithoutRepetaedElements.push( array[i-1] )
+        }
       }
-      return check;
-    } );
+    }
+
+    return arrayWithoutRepetaedElements;
   }
 
 }
