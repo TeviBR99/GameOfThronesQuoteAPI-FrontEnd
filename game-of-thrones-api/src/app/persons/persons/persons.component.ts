@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
 import { FilterPerson } from '../model/filterperson';
 import { FormControl } from '@angular/forms';
+import { Utils } from 'src/app/shared/model/utils';
 
 @Component({
   selector: 'app-persons',
@@ -23,7 +24,6 @@ export class PersonsComponent {
     private router: Router) {
   }
 
-
   ngOnInit(){
     this.getAllCharacters()
   }
@@ -36,19 +36,24 @@ export class PersonsComponent {
   }
 
   findAll(characterResponse:Character[]):void{
-
+    if( this.filter.checkIfFiltersAreEmpty() ){
+      this.persons = characterResponse
+    }
   }
 
   findWithFilters(characterResponse:Character[]):void{
-
+    if( !this.filter.checkIfFiltersAreEmpty() ){
+      this.persons = Utils.dropRepeatedDataAndMerge( this.filter.filterResults(characterResponse) )
+    }
   }
 
   search():void{
-
+    this.getAllCharacters();
   }
 
   clearFilters():void{
-
+    this.filter.clearFilters()
+    this.getAllCharacters();
   }
 
   goToCharaterDetail(person: Character){

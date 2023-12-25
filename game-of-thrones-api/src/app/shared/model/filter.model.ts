@@ -32,6 +32,9 @@ export class Filter {
     if(this.slug.value != ""){
       matchesWithSlug = array.filter( house =>  house.slug!.toLowerCase().indexOf( this.slug.value!.toLowerCase().trim() ) > -1);
     }
+
+
+
     return results.concat(matchesWithName,matchesWithSlug) ;
   }
 
