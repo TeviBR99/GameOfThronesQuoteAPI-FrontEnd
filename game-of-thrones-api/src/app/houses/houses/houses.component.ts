@@ -4,10 +4,7 @@ import { House } from '../model/house.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
 import { Character } from 'src/app/persons/model/character.model';
-import { FormControl } from '@angular/forms';
-import { from } from 'rxjs';
-import { Filter, FilterHouse } from 'src/app/shared/model/filter.model';
-
+import { FilterHouse } from '../model/filterhouse';
 @Component({
   selector: 'app-houses',
   templateUrl: './houses.component.html',
@@ -17,7 +14,7 @@ export class HousesComponent {
 
   houses: House[] = [];
 
-  filter : FilterHouse = new FilterHouse()
+  filter : FilterHouse = new FilterHouse();
 
   constructor(
     private housesService: HousesService,
@@ -34,6 +31,7 @@ export class HousesComponent {
       responseHouses =>{
         this.findAll(responseHouses)
         this.findWithFilters(responseHouses);
+        console.log("houses - results: ", this.houses)
       }
     )
   }
@@ -48,15 +46,13 @@ export class HousesComponent {
   findWithFilters(responseHouses:House[]):void{
     if( !this.filter.checkIfFiltersAreEmpty() ){
       console.log("findWithFilters")
-      this.houses = responseHouses.filter(item => item.name.toLowerCase().indexOf( this.filter.name.value!.toLowerCase() ) > -1 )
+      this.houses = this.filter.filterResults(responseHouses);
     }
   }
 
   searchFilters():void{
-    console.log("HouseName: ", this.filter.name.value);
-    console.log("Slug: ", this.filter.slug.value);
-    console.log("Member: ", this.filter.member.value);
-    this.getAllHouses()
+    this.filter.printFiltersInConsole();
+    this.getAllHouses();
   }
 
   clearFilters():void{
