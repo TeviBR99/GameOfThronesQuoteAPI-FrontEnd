@@ -4,7 +4,8 @@ import { House } from '../model/house.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { Router } from '@angular/router';
 import { Character } from 'src/app/persons/model/character.model';
-
+import { FilterHouse } from '../model/filterhouse';
+import { Utils } from 'src/app/shared/model/utils';
 @Component({
   selector: 'app-houses',
   templateUrl: './houses.component.html',
@@ -12,7 +13,9 @@ import { Character } from 'src/app/persons/model/character.model';
 })
 export class HousesComponent {
 
-  dataFetched: House[] = [];
+  houses: House[] = [];
+
+  filter : FilterHouse = new FilterHouse();
 
   constructor(
     private housesService: HousesService,
@@ -26,11 +29,38 @@ export class HousesComponent {
   getAllHouses():void{
     this.housesService.getHouses()
     .subscribe(
-      res =>{
-        this.dataFetched = res
-        console.log("dataFetched: ", this.dataFetched)
+      responseHouses =>{
+        this.findAll(responseHouses)
+        this.findWithFilters(responseHouses);
       }
     )
+  }
+
+  findAll(responseHouses:House[]):void{
+    if( this.filter.checkIfFiltersAreEmpty() ){
+      this.houses = responseHouses;
+    }
+  }
+
+  findWithFilters(responseHouses:House[]):void{
+    if( !this.filter.checkIfFiltersAreEmpty() ){
+      this.houses = this.filter.filterResults(responseHouses) ;
+    }
+  }
+
+  searchFilters():void{
+    this.filter.printFiltersInConsole();
+    this.getAllHouses();
+  }
+
+  clearFilters():void{
+    this.filter.clearFilters();
+    this.getAllHouses()
+  }
+
+  goToHouseInfo(houseItem:House):void{
+    this.sharedService.setHouse(houseItem)
+    this.router.navigate(['/house-info'])
   }
 
   describeCharacter(persons: Character[]): string{
@@ -41,11 +71,6 @@ export class HousesComponent {
     return description;
   }
 
-  actionButton(houseItem:House):void{
-    console.log("House: ", houseItem)
-    this.sharedService.setHouse(houseItem)
-    this.router.navigate(['/house-info'])
-  }
 
 
 }

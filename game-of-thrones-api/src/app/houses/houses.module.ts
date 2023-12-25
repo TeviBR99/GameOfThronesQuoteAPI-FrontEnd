@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 const routes: Routes = [
@@ -23,6 +26,8 @@ const routes: Routes = [
     HttpClientModule,
     MatTableModule,
     MatButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports:[
