@@ -3,21 +3,22 @@ import { Filter } from "src/app/shared/model/filter.model";
 import { Character } from "./character.model";
 import { Utils } from "src/app/shared/model/utils";
 
+
 export class FilterPerson extends Filter {
   quote = new FormControl('');
 
   filterResults(arrayOfPersons:Character[]):Character[]{
-    let dataFiltered: Character[] = this.quote.value == "" ? super.filterByNameOrSlug(arrayOfPersons) : [];
+    let dataFiltered: Character[] = []
+    let results: Character[] = []
     if(this.quote.value != ""){
       arrayOfPersons.forEach( p =>{
-        let resQuotes = []
-        resQuotes = p.quotes!.filter(quote => quote.sentence.toLowerCase().trim().includes( this.quote.value! )  )
-        if(resQuotes!.length > 0 && Utils.checkIfExistsInArray(dataFiltered,p) ){
+        let resQuotes = p.quotes!.filter(quote => quote.toLowerCase().trim().includes( this.quote!.value!.toLowerCase().trim() ) )
+        if( resQuotes.length > 0 ){
           dataFiltered.push( p )
         }
       })
     }
-    return dataFiltered;
+    return Utils.dropRepeatedDataAndMerge( results.concat( super.filterByNameOrSlug(arrayOfPersons), dataFiltered) ) ;
   }
 
 

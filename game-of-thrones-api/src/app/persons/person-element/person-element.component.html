@@ -4,6 +4,6 @@
   <p *ngIf="personElement.slug"> Slug: {{ personElement.slug }} </p>
 
 <div *ngFor="let quote of personElement.quotes;">
-    <p (click)="goToQuoteInfo(quote)"> - {{ quote }} </p>
+    <p> - {{ quote }} </p>
 </div>
 

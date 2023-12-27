@@ -1,5 +1,6 @@
 import { FormControl } from "@angular/forms";
 import { ApiDto } from "./apidto.model";
+import { Utils } from "./utils";
 
 export class Filter {
   name = new FormControl('');
@@ -33,9 +34,7 @@ export class Filter {
       matchesWithSlug = array.filter( house =>  house.slug!.toLowerCase().indexOf( this.slug.value!.toLowerCase().trim() ) > -1);
     }
 
-
-
-    return results.concat(matchesWithName,matchesWithSlug) ;
+    return Utils.dropRepeatedDataAndMerge( results.concat(matchesWithName,matchesWithSlug) ) ;
   }
 
 

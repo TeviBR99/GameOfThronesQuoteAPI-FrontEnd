@@ -4,7 +4,6 @@ import { Character } from '../model/character.model';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
 import { FilterPerson } from '../model/filterperson';
-import { FormControl } from '@angular/forms';
 import { Utils } from 'src/app/shared/model/utils';
 
 @Component({
@@ -14,7 +13,7 @@ import { Utils } from 'src/app/shared/model/utils';
 })
 export class PersonsComponent {
 
-  persons?: Character[]
+  persons: Character[] = []
 
   filter: FilterPerson = new FilterPerson()
 
@@ -30,6 +29,7 @@ export class PersonsComponent {
 
   getAllCharacters():void{
     this.personsService.getAllCharacters().subscribe(charactersResponse =>{
+      console.log("Persons: ", charactersResponse)
       this.findAll(charactersResponse)
       this.findWithFilters(charactersResponse)
     })
@@ -37,6 +37,7 @@ export class PersonsComponent {
 
   findAll(characterResponse:Character[]):void{
     if( this.filter.checkIfFiltersAreEmpty() ){
+
       this.persons = characterResponse
     }
   }
