@@ -29,10 +29,6 @@ export class PersonElementComponent {
     }
   }
 
-  goToQuoteInfo(quote: Quote){
-    console.log("goToQuoteInfo")
-  }
-
 }
 
 

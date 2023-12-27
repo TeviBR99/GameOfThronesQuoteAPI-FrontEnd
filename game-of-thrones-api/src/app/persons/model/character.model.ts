@@ -4,5 +4,5 @@ import { ApiDto } from "src/app/shared/model/apidto.model";
 
 export class Character extends ApiDto {
   house?: House;
-  quotes?: Quote[]
+  quotes!: string[]
 }

@@ -3,6 +3,8 @@ import { PersonsService } from '../service/persons.service';
 import { Character } from '../model/character.model';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
+import { FilterPerson } from '../model/filterperson';
+import { Utils } from 'src/app/shared/model/utils';
 
 @Component({
   selector: 'app-persons',
@@ -11,7 +13,9 @@ import { SharedService } from 'src/app/shared/shared.service';
 })
 export class PersonsComponent {
 
-  persons?: Character[]
+  persons: Character[] = []
+
+  filter: FilterPerson = new FilterPerson()
 
   constructor(
     private personsService: PersonsService,
@@ -19,11 +23,38 @@ export class PersonsComponent {
     private router: Router) {
   }
 
-
   ngOnInit(){
-    this.personsService.getAllCharacters().subscribe(characters =>{
-      this.persons = characters
+    this.getAllCharacters()
+  }
+
+  getAllCharacters():void{
+    this.personsService.getAllCharacters().subscribe(charactersResponse =>{
+      console.log("Persons: ", charactersResponse)
+      this.findAll(charactersResponse)
+      this.findWithFilters(charactersResponse)
     })
+  }
+
+  findAll(characterResponse:Character[]):void{
+    if( this.filter.checkIfFiltersAreEmpty() ){
+
+      this.persons = characterResponse
+    }
+  }
+
+  findWithFilters(characterResponse:Character[]):void{
+    if( !this.filter.checkIfFiltersAreEmpty() ){
+      this.persons = Utils.dropRepeatedDataAndMerge( this.filter.filterResults(characterResponse) )
+    }
+  }
+
+  search():void{
+    this.getAllCharacters();
+  }
+
+  clearFilters():void{
+    this.filter.clearFilters()
+    this.getAllCharacters();
   }
 
   goToCharaterDetail(person: Character){
