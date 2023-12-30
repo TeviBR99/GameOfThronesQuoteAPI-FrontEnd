@@ -10,6 +10,8 @@ import { Quote } from '../model/quote.model';
 export class QuotesComponent {
 
   quotes ?: Quote[]
+  quoteSelected ?: Quote
+  dialogOpened: boolean = false
 
   constructor( private quoteService: QuotesService){}
 
@@ -20,7 +22,21 @@ export class QuotesComponent {
   }
 
   openDialog(quoteElement: Quote){
+    console.log("quoteElement: ", quoteElement)
+    this.dialogOpened = true;
+  }
 
+  confirmSwtichQuote(){
+    console.log("confirmSwtichQuote")
+    /*this.quoteService.getRandomQuote().subscribe(responseQuote =>{
+      this.quotes = this.quotes?.filter(quote => quote !== this.quoteSelected)
+      this.quotes?.push(responseQuote)
+    })*/
+  }
+
+  closeDialog(){
+    console.log("closeDialog")
+    this.dialogOpened = false;
   }
 
 
