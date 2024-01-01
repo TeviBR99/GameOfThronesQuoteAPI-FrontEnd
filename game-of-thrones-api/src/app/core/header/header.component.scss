@@ -1,7 +1,17 @@
 #navbar-menu{
-  border: solid black 1px;
   display: flex;
+  height: 5vh;
+  background-color: black;
   a{
     font-size: large;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.section-menu{
+  margin: auto;
+  &:hover{
+    background-color: azure;
   }
 }
