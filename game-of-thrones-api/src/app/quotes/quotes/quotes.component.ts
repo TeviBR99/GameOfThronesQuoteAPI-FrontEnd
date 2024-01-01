@@ -9,29 +9,34 @@ import { Quote } from '../model/quote.model';
 })
 export class QuotesComponent {
 
-  quotes ?: Quote[]
-  quoteSelected ?: Quote
+  positionSelected ?: number
   dialogOpened: boolean = false
+  quotesMap : Map<number,Quote> = new Map()
 
   constructor( private quoteService: QuotesService){}
 
   ngOnInit(){
     this.quoteService.getRandomQuotes().subscribe(resQuotes =>{
-      this.quotes = resQuotes;
+        let i = 0;
+        resQuotes.forEach(q =>{
+          this.quotesMap?.set(i,q)
+          i++;
+        } )
     })
   }
 
-  openDialog(quoteElement: Quote){
-    console.log("quoteElement: ", quoteElement)
+  openDialog(position:number){
+    console.log("quoteElement position: ", position)
+    this.positionSelected = position
     this.dialogOpened = true;
   }
 
   confirmSwtichQuote(){
     console.log("confirmSwtichQuote")
-    /*this.quoteService.getRandomQuote().subscribe(responseQuote =>{
-      this.quotes = this.quotes?.filter(quote => quote !== this.quoteSelected)
-      this.quotes?.push(responseQuote)
-    })*/
+    this.quoteService.getRandomQuote().subscribe(responseQuote =>{
+      this.quotesMap.set(this.positionSelected!, responseQuote)
+      this.closeDialog();
+    })
   }
 
   closeDialog(){
@@ -39,7 +44,9 @@ export class QuotesComponent {
     this.dialogOpened = false;
   }
 
-
+  getQuotes(){
+    return Array.from(this.quotesMap.values())
+  }
 
 
 
