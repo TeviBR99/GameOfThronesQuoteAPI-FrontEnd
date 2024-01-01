@@ -2,7 +2,18 @@ import { ApiDto } from "./apidto.model";
 
 export class Utils{
 
+  /* Private methods */
+  private static countTimesRepeated<T extends ApiDto>(data: T[], element: T, position:number ):number{
+    let timesRepeated = 1;
+    for(let i=0; i<data.length; i++){
+      if( position != i && data[i] == element){
+        timesRepeated++;
+      }
+    }
+    return timesRepeated;
+  }
 
+  /* Public methods */
   static checkIfExistsInArray<T extends ApiDto>(data: T[], element: T):boolean{
     return data.length > 0 && data.includes(element);
   }
@@ -17,14 +28,7 @@ export class Utils{
     return resArray;
   }
 
-  private static countTimesRepeated<T extends ApiDto>(data: T[], element: T, position:number ):number{
-    let timesRepeated = 1;
-    for(let i=0; i<data.length; i++){
-      if( position != i && data[i] == element){
-        timesRepeated++;
-      }
-    }
-    return timesRepeated;
-  }
+
+
 
 }

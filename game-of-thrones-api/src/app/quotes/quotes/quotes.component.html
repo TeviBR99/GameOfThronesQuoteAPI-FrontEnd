@@ -1,6 +1,16 @@
 <p>Random quotes</p>
 
-<div *ngFor="let quote of quotes">
-  <p> Sentence: {{ quote.sentence }} </p>
-  <p> - Character: {{ quote.character.name }} </p>
+<div *ngFor="let quote of getQuotes(); index as position" (click)="openDialog(position)">
+  <p> - Sentence: {{ quote.sentence }} </p>
+  <p> Character: {{ quote.character.name }} </p>
+</div>
+
+<div *ngIf="dialogOpened">
+  <p>DIALOG OPENED</p>
+  <button mat-stroked-button  (click)="confirmSwtichQuote()">
+    Confirm <!--<mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page"  ></mat-icon>-->
+  </button>
+  <button mat-stroked-button  (click)="closeDialog()">
+    Close <!--<mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page"  ></mat-icon>-->
+  </button>
 </div>
