@@ -31,23 +31,25 @@
 
 <table>
   <tr>
+    <th> Img </th>
     <th>Nombre</th>
-    <th>Slug</th>
+    <!--<th>Slug</th>-->
     <th>House</th>
-    <th>Quotes</th>
+    <!-- <th>Quotes</th> -->
   </tr>
   <tr *ngFor="let person of persons" (click)="goToCharaterDetail(person)" >
+    <td> jpg </td>
     <td> {{ person.name }} </td>
-    <td> {{ person.slug }}  </td>
+    <!--<td> {{ person.slug }}  </td>-->
     <td>
-      Slug: {{ person.house?.slug }}
-      Name: {{ person.house?.name }}
+      <!-- Slug: {{ person.house?.slug }} -->
+      {{ person.house?.name }}
     </td>
-    <td>
+    <!--<td>
       <div *ngFor="let quote of person.quotes">
           <p>- {{ quote }} </p>
       </div>
-    </td>
+    </td>-->
   </tr>
 </table>
 
