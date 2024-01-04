@@ -48,6 +48,10 @@ export class PersonsComponent {
     }
   }
 
+  getImageURL(person: Character){
+    return "assets/img/characters/" + person.slug + ".jpg";
+  }
+
   search():void{
     this.getAllCharacters();
   }
