@@ -31,7 +31,7 @@
 
 <div id="content">
   <div class="element" *ngFor="let person of persons" (click)="goToCharaterDetail(person)">
-    <div class="pic-name">
+    <div>
       <img src="{{getImageURL(person)}}" alt="{{person.name}}">
     </div>
     <div>
