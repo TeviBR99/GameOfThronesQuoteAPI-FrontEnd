@@ -4,9 +4,31 @@ img{
   height: 20vw;
 }
 
-td{
-  margin: 25% 25%;
+#filters{
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  .row-filters{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+
+    .label-filter{
+      padding-right: 1%;
+    }
+
+    .input-filter{
+      padding-left: 1%;
+    }
+  }
+
+  #row-action-buttons{
+
+  }
 }
+
 
 #content{
   display: flex;
@@ -20,5 +42,11 @@ td{
     flex-basis: 0;
     padding: 1%;
     text-align: center;
+
+    &:hover{
+      background-color: rgb(94, 90, 90);
+      cursor: pointer;
+    }
+
   }
 }

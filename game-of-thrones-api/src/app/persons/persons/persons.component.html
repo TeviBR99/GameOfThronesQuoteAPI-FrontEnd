@@ -2,24 +2,24 @@
 
 <div id="filters">
   <!-- Filter by name -->
-  <div>
-    <label for="personName"> Name: </label>
-    <input id="personName" type="text" [formControl]="filter.name" >
+  <div class="row-filters">
+    <div class="label-filter"> <label for="personName"> Name: </label> </div>
+    <div class="input-filter"> </div><input id="personName" type="text" [formControl]="filter.name" >
   </div>
 
   <!-- Filter by Slug -->
-  <div>
-    <label for="personSlug"> Slug: </label>
-    <input id="personSlug" type="text" [formControl]="filter.slug" >
+  <div class="row-filters">
+    <div class="label-filter"> <label for="personSlug"> Slug: </label> </div>
+    <div class="input-filter"> <input id="personSlug" type="text" [formControl]="filter.slug" > </div>
   </div>
 
   <!-- Filter by members -->
-  <div>
-    <label for="personQuote"> Quote: </label>
-    <input id="personQuote" type="text" [formControl]="filter.quote" >
+  <div class="row-filters">
+    <div class="label-filter"> <label for="personQuote"> Quote: </label> </div>
+    <div class="input-filter"> <input id="personQuote" type="text" [formControl]="filter.quote" > </div>
   </div>
 
-  <div>
+  <div id="row-action-buttons">
     <button mat-stroked-button  (click)="search()" >
       Search <mat-icon aria-hidden="false" aria-label="Search icon" fontIcon="find_in_page"  ></mat-icon>
     </button>
@@ -28,6 +28,8 @@
     </button>
   </div>
 </div>
+
+
 
 <div id="content">
   <div class="element" *ngFor="let person of persons" (click)="goToCharaterDetail(person)">

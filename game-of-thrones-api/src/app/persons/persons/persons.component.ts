@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
 import { FilterPerson } from '../model/filterperson';
 import { Utils } from 'src/app/shared/model/utils';
+import { Tile } from 'src/app/shared/model/tile';
 
 @Component({
   selector: 'app-persons',
@@ -12,6 +13,13 @@ import { Utils } from 'src/app/shared/model/utils';
   styleUrls: ['./persons.component.scss']
 })
 export class PersonsComponent {
+
+  tiles: Tile[] = [
+    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
+    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
+    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
+    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
+  ];
 
   persons: Character[] = []
 
