@@ -1,9 +1,27 @@
 img{
   border-radius: 3%;
   width: 18vw;
-  height: 30vh;
+  height: 20vw;
 }
 
 td{
   margin: 25% 25%;
+}
+
+#content{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+
+  .element{
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 1%;
+
+    .pic-name{
+
+    }
+  }
 }
